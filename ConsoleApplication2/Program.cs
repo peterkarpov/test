@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,7 +26,20 @@ namespace ConsoleApplication2
 
             IComparable comparable = i;
 
-            
+            Encoding encodingUTF8 = Encoding.UTF8;
+
+            var md5 = MD5.Create().Hash;
+
+            var hash = BitConverter.ToString(MD5.Create().ComputeHash(Encoding.UTF8.GetBytes("string")));
+
+            Convert.ToBase64String(new byte[] { });
+
+            var b1 = (byte)1;
+            var b2 = (byte)2;
+            var b255 = (byte)255;
+
+            Byte[] encodedBytes = encodingUTF8.GetBytes(s);
+            String decodedString = encodingUTF8.GetString(encodedBytes);
 
             IConvertible convert = i;
 
