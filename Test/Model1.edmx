@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ESN3Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ESN3ModelStoreContainer">
+    <EntitySet Name="Comments" EntityType="ESN3Model.Store.Comments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Content" EntityType="ESN3Model.Store.Content" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Dislikes" EntityType="ESN3Model.Store.Dislikes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Friends" EntityType="ESN3Model.Store.Friends" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Images" EntityType="ESN3Model.Store.Images" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Likes" EntityType="ESN3Model.Store.Likes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Messages" EntityType="ESN3Model.Store.Messages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="News" EntityType="ESN3Model.Store.News" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Photobooks" EntityType="ESN3Model.Store.Photobooks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Profiles" EntityType="ESN3Model.Store.Profiles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Talks" EntityType="ESN3Model.Store.Talks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="ESN3Model.Store.Users" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Friends__Profile__3B40CD36" Association="ESN3Model.Store.FK__Friends__Profile__3B40CD36">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Friends" EntitySet="Friends" />
+    </AssociationSet>
+    <AssociationSet Name="Photobooks_PhotobookId" Association="ESN3Model.Store.Photobooks_PhotobookId">
+      <End Role="Photobooks" EntitySet="Photobooks" />
+      <End Role="Images" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Messages_dbo_Profiles_from" Association="ESN3Model.Store.FK_dbo_Messages_dbo_Profiles_from">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Messages_dbo_Profiles_to" Association="ESN3Model.Store.FK_dbo_Messages_dbo_Profiles_to">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Profiles__Profil__3A4CA8FD" Association="ESN3Model.Store.FK__Profiles__Profil__3A4CA8FD">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Profiles" EntitySet="Profiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Talks_dbo_Profile_Profile1Id" Association="ESN3Model.Store.FK_dbo_Talks_dbo_Profile_Profile1Id">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Talks" EntitySet="Talks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_Talks_dbo_Profile_Profile2Id" Association="ESN3Model.Store.FK_dbo_Talks_dbo_Profile_Profile2Id">
+      <End Role="Profiles" EntitySet="Profiles" />
+      <End Role="Talks" EntitySet="Talks" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="creationTime" Type="datetime" Nullable="false" />
+    <Property Name="text" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TargetId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Content">
+    <Key>
+      <PropertyRef Name="ContentId" />
+    </Key>
+    <Property Name="ContentId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="type" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="annotation" Type="nvarchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Dislikes">
+    <Key>
+      <PropertyRef Name="DislikeId" />
+    </Key>
+    <Property Name="DislikeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TargetId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Friends">
+    <Key>
+      <PropertyRef Name="FriendId" />
+    </Key>
+    <Property Name="FriendId" Type="int" Nullable="false" />
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="subscriberId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="ImageId" />
+    </Key>
+    <Property Name="ImageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="PhotobookId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ImageMimeType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="fileName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="DateOfLoad" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Likes">
+    <Key>
+      <PropertyRef Name="LikeId" />
+    </Key>
+    <Property Name="LikeId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="NewsId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="from" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="to" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="creationTime" Type="datetime" Nullable="false" />
+    <Property Name="text" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="TalkId" Type="uniqueidentifier" Nullable="true" />
+  </EntityType>
+  <EntityType Name="News">
+    <Key>
+      <PropertyRef Name="NewsId" />
+    </Key>
+    <Property Name="NewsId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="creationTime" Type="datetime" Nullable="false" />
+    <Property Name="theme" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Photobooks">
+    <Key>
+      <PropertyRef Name="PhotobookId" />
+    </Key>
+    <Property Name="PhotobookId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="viewForFriend" Type="int" Nullable="false" />
+    <Property Name="viewForAll" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Profiles">
+    <Key>
+      <PropertyRef Name="ProfileId" />
+    </Key>
+    <Property Name="ProfileId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="fName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="dob" Type="datetime" Nullable="true" />
+    <Property Name="Gender" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
+    <Property Name="ImageMimeType" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="lName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="mName" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="AvatarImageId" Type="uniqueidentifier" Nullable="true" />
+    <Property Name="country" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="language" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="Annotation" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Talks">
+    <Key>
+      <PropertyRef Name="TalkId" />
+    </Key>
+    <Property Name="TalkId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Profile1Id" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Profile2Id" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="login" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="email" Type="nvarchar" Nullable="true" MaxLength="50" />
+    <Property Name="role" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="FK__Friends__Profile__3B40CD36">
+    <End Role="Users" Type="ESN3Model.Store.Users" Multiplicity="1" />
+    <End Role="Friends" Type="ESN3Model.Store.Friends" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Friends">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Photobooks_PhotobookId">
+    <End Role="Photobooks" Type="ESN3Model.Store.Photobooks" Multiplicity="0..1" />
+    <End Role="Images" Type="ESN3Model.Store.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photobooks">
+        <PropertyRef Name="PhotobookId" />
+      </Principal>
+      <Dependent Role="Images">
+        <PropertyRef Name="PhotobookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Messages_dbo_Profiles_from">
+    <End Role="Profiles" Type="ESN3Model.Store.Profiles" Multiplicity="1" />
+    <End Role="Messages" Type="ESN3Model.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="ProfileId" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="from" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Messages_dbo_Profiles_to">
+    <End Role="Profiles" Type="ESN3Model.Store.Profiles" Multiplicity="1" />
+    <End Role="Messages" Type="ESN3Model.Store.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="ProfileId" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="to" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Profiles__Profil__3A4CA8FD">
+    <End Role="Users" Type="ESN3Model.Store.Users" Multiplicity="1" />
+    <End Role="Profiles" Type="ESN3Model.Store.Profiles" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Profiles">
+        <PropertyRef Name="ProfileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Talks_dbo_Profile_Profile1Id">
+    <End Role="Profiles" Type="ESN3Model.Store.Profiles" Multiplicity="1" />
+    <End Role="Talks" Type="ESN3Model.Store.Talks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="ProfileId" />
+      </Principal>
+      <Dependent Role="Talks">
+        <PropertyRef Name="Profile1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_Talks_dbo_Profile_Profile2Id">
+    <End Role="Profiles" Type="ESN3Model.Store.Profiles" Multiplicity="1" />
+    <End Role="Talks" Type="ESN3Model.Store.Talks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profiles">
+        <PropertyRef Name="ProfileId" />
+      </Principal>
+      <Dependent Role="Talks">
+        <PropertyRef Name="Profile2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ESN3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="CommentId" />
+          </Key>
+          <Property Name="CommentId" Type="Guid" Nullable="false" />
+          <Property Name="ProfileId" Type="Guid" Nullable="false" />
+          <Property Name="creationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TargetId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Content">
+          <Key>
+            <PropertyRef Name="ContentId" />
+          </Key>
+          <Property Name="ContentId" Type="Guid" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="annotation" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Dislikes">
+          <Key>
+            <PropertyRef Name="DislikeId" />
+          </Key>
+          <Property Name="DislikeId" Type="Guid" Nullable="false" />
+          <Property Name="ProfileId" Type="Guid" Nullable="false" />
+          <Property Name="TargetId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Friends">
+          <Key>
+            <PropertyRef Name="FriendId" />
+          </Key>
+          <Property Name="FriendId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileId" Type="Guid" Nullable="false" />
+          <Property Name="subscriberId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Friends__Profile__3B40CD36" FromRole="Friends" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Images">
+          <Key>
+            <PropertyRef Name="ImageId" />
+          </Key>
+          <Property Name="ImageId" Type="Guid" Nullable="false" />
+          <Property Name="PhotobookId" Type="Guid" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageMimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfLoad" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Photobooks" Relationship="Self.Photobooks_PhotobookId" FromRole="Images" ToRole="Photobooks" />
+        </EntityType>
+        <EntityType Name="Likes">
+          <Key>
+            <PropertyRef Name="LikeId" />
+          </Key>
+          <Property Name="LikeId" Type="Guid" Nullable="false" />
+          <Property Name="NewsId" Type="Guid" />
+          <Property Name="ProfileId" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessageId" />
+          </Key>
+          <Property Name="MessageId" Type="Guid" Nullable="false" />
+          <Property Name="from" Type="Guid" Nullable="false" />
+          <Property Name="to" Type="Guid" Nullable="false" />
+          <Property Name="creationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TalkId" Type="Guid" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK_dbo_Messages_dbo_Profiles_from" FromRole="Messages" ToRole="Profiles" />
+          <NavigationProperty Name="Profiles1" Relationship="Self.FK_dbo_Messages_dbo_Profiles_to" FromRole="Messages" ToRole="Profiles" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="Guid" Nullable="false" />
+          <Property Name="ProfileId" Type="Guid" />
+          <Property Name="creationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="theme" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Photobooks">
+          <Key>
+            <PropertyRef Name="PhotobookId" />
+          </Key>
+          <Property Name="PhotobookId" Type="Guid" Nullable="false" />
+          <Property Name="ProfileId" Type="Guid" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="viewForFriend" Type="Int32" Nullable="false" />
+          <Property Name="viewForAll" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Images" Relationship="Self.Photobooks_PhotobookId" FromRole="Photobooks" ToRole="Images" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="Guid" Nullable="false" />
+          <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageMimeType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="lName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AvatarImageId" Type="Guid" />
+          <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Annotation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Messages" Relationship="Self.FK_dbo_Messages_dbo_Profiles_from" FromRole="Profiles" ToRole="Messages" />
+          <NavigationProperty Name="Messages1" Relationship="Self.FK_dbo_Messages_dbo_Profiles_to" FromRole="Profiles" ToRole="Messages" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Profiles__Profil__3A4CA8FD" FromRole="Profiles" ToRole="Users" />
+          <NavigationProperty Name="Talks" Relationship="Self.FK_dbo_Talks_dbo_Profile_Profile1Id" FromRole="Profiles" ToRole="Talks" />
+          <NavigationProperty Name="Talks1" Relationship="Self.FK_dbo_Talks_dbo_Profile_Profile2Id" FromRole="Profiles" ToRole="Talks" />
+        </EntityType>
+        <EntityType Name="Talks">
+          <Key>
+            <PropertyRef Name="TalkId" />
+          </Key>
+          <Property Name="TalkId" Type="Guid" Nullable="false" />
+          <Property Name="Profile1Id" Type="Guid" Nullable="false" />
+          <Property Name="Profile2Id" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK_dbo_Talks_dbo_Profile_Profile1Id" FromRole="Talks" ToRole="Profiles" />
+          <NavigationProperty Name="Profiles1" Relationship="Self.FK_dbo_Talks_dbo_Profile_Profile2Id" FromRole="Talks" ToRole="Profiles" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="role" Type="Int32" />
+          <NavigationProperty Name="Friends" Relationship="Self.FK__Friends__Profile__3B40CD36" FromRole="Users" ToRole="Friends" />
+          <NavigationProperty Name="Profiles" Relationship="Self.FK__Profiles__Profil__3A4CA8FD" FromRole="Users" ToRole="Profiles" />
+        </EntityType>
+        <Association Name="FK__Friends__Profile__3B40CD36">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Friends" Type="Self.Friends" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Friends">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Photobooks_PhotobookId">
+          <End Role="Photobooks" Type="Self.Photobooks" Multiplicity="0..1" />
+          <End Role="Images" Type="Self.Images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Photobooks">
+              <PropertyRef Name="PhotobookId" />
+            </Principal>
+            <Dependent Role="Images">
+              <PropertyRef Name="PhotobookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Messages_dbo_Profiles_from">
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="from" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Messages_dbo_Profiles_to">
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="to" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profiles__Profil__3A4CA8FD">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Talks_dbo_Profile_Profile1Id">
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="1" />
+          <End Role="Talks" Type="Self.Talks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Talks">
+              <PropertyRef Name="Profile1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Talks_dbo_Profile_Profile2Id">
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="1" />
+          <End Role="Talks" Type="Self.Talks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profiles">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Talks">
+              <PropertyRef Name="Profile2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ESN3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comments" />
+          <EntitySet Name="Content" EntityType="Self.Content" />
+          <EntitySet Name="Dislikes" EntityType="Self.Dislikes" />
+          <EntitySet Name="Friends" EntityType="Self.Friends" />
+          <EntitySet Name="Images" EntityType="Self.Images" />
+          <EntitySet Name="Likes" EntityType="Self.Likes" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Photobooks" EntityType="Self.Photobooks" />
+          <EntitySet Name="Profiles" EntityType="Self.Profiles" />
+          <EntitySet Name="Talks" EntityType="Self.Talks" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__Friends__Profile__3B40CD36" Association="Self.FK__Friends__Profile__3B40CD36">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Friends" EntitySet="Friends" />
+          </AssociationSet>
+          <AssociationSet Name="Photobooks_PhotobookId" Association="Self.Photobooks_PhotobookId">
+            <End Role="Photobooks" EntitySet="Photobooks" />
+            <End Role="Images" EntitySet="Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Messages_dbo_Profiles_from" Association="Self.FK_dbo_Messages_dbo_Profiles_from">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Messages_dbo_Profiles_to" Association="Self.FK_dbo_Messages_dbo_Profiles_to">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profiles__Profil__3A4CA8FD" Association="Self.FK__Profiles__Profil__3A4CA8FD">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Talks_dbo_Profile_Profile1Id" Association="Self.FK_dbo_Talks_dbo_Profile_Profile1Id">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Talks" EntitySet="Talks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Talks_dbo_Profile_Profile2Id" Association="Self.FK_dbo_Talks_dbo_Profile_Profile2Id">
+            <End Role="Profiles" EntitySet="Profiles" />
+            <End Role="Talks" EntitySet="Talks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ESN3ModelStoreContainer" CdmEntityContainer="ESN3Entities">
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Comments)">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="creationTime" ColumnName="creationTime" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Content">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Content)">
+        <MappingFragment StoreEntitySet="Content">
+          <ScalarProperty Name="ContentId" ColumnName="ContentId" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="annotation" ColumnName="annotation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Dislikes">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Dislikes)">
+        <MappingFragment StoreEntitySet="Dislikes">
+          <ScalarProperty Name="DislikeId" ColumnName="DislikeId" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Friends">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Friends)">
+        <MappingFragment StoreEntitySet="Friends">
+          <ScalarProperty Name="FriendId" ColumnName="FriendId" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="subscriberId" ColumnName="subscriberId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Images)">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+          <ScalarProperty Name="PhotobookId" ColumnName="PhotobookId" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="fileName" ColumnName="fileName" />
+          <ScalarProperty Name="DateOfLoad" ColumnName="DateOfLoad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Likes)">
+        <MappingFragment StoreEntitySet="Likes">
+          <ScalarProperty Name="LikeId" ColumnName="LikeId" />
+          <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Messages)">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="from" ColumnName="from" />
+          <ScalarProperty Name="to" ColumnName="to" />
+          <ScalarProperty Name="creationTime" ColumnName="creationTime" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="TalkId" ColumnName="TalkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.News)">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="creationTime" ColumnName="creationTime" />
+          <ScalarProperty Name="theme" ColumnName="theme" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Photobooks">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Photobooks)">
+        <MappingFragment StoreEntitySet="Photobooks">
+          <ScalarProperty Name="PhotobookId" ColumnName="PhotobookId" />
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="viewForFriend" ColumnName="viewForFriend" />
+          <ScalarProperty Name="viewForAll" ColumnName="viewForAll" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Profiles)">
+        <MappingFragment StoreEntitySet="Profiles">
+          <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="dob" ColumnName="dob" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="lName" ColumnName="lName" />
+          <ScalarProperty Name="mName" ColumnName="mName" />
+          <ScalarProperty Name="AvatarImageId" ColumnName="AvatarImageId" />
+          <ScalarProperty Name="country" ColumnName="country" />
+          <ScalarProperty Name="language" ColumnName="language" />
+          <ScalarProperty Name="Annotation" ColumnName="Annotation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Talks">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Talks)">
+        <MappingFragment StoreEntitySet="Talks">
+          <ScalarProperty Name="TalkId" ColumnName="TalkId" />
+          <ScalarProperty Name="Profile1Id" ColumnName="Profile1Id" />
+          <ScalarProperty Name="Profile2Id" ColumnName="Profile2Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="IsTypeOf(ESN3Model.Users)">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

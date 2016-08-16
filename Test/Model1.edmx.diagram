@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="66960b8eb5204811880a549b7f90246c" Name="Diagram1">
+        <EntityTypeShape EntityType="ESN3Model.Comments" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Content" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Dislikes" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Friends" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Images" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Likes" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Messages" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.News" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Photobooks" Width="1.5" PointX="7.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Profiles" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Talks" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ESN3Model.Users" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="ESN3Model.FK__Friends__Profile__3B40CD36" ManuallyRouted="false" />
+        <AssociationConnector Association="ESN3Model.Photobooks_PhotobookId" ManuallyRouted="false" />
+        <AssociationConnector Association="ESN3Model.FK_dbo_Messages_dbo_Profiles_from" ManuallyRouted="false" />
+        <AssociationConnector Association="ESN3Model.FK_dbo_Messages_dbo_Profiles_to" ManuallyRouted="false" />
+        <AssociationConnector Association="ESN3Model.FK__Profiles__Profil__3A4CA8FD" ManuallyRouted="false" />
+        <AssociationConnector Association="ESN3Model.FK_dbo_Talks_dbo_Profile_Profile1Id" ManuallyRouted="false" />
+        <AssociationConnector Association="ESN3Model.FK_dbo_Talks_dbo_Profile_Profile2Id" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
